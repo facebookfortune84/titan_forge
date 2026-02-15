@@ -1,0 +1,23 @@
+[
+  {
+    "id": "tier_basic",
+    "name": "Basic",
+    "price": 199.00,
+    "description": "Ideal for small projects and startups.",
+    "features": ["1 agent team", "Basic tool suite", "Community support"]
+  },
+  {
+    "id": "tier_pro",
+    "name": "Pro",
+    "price": 499.00,
+    "description": "Perfect for growing businesses and complex projects.",
+    "features": ["5 agent teams", "Advanced tool suite", "Priority email support", "Code review workflow"]
+  },
+  {
+    "id": "tier_enterprise",
+    "name": "Enterprise",
+    "price": 1999.00,
+    "description": "Full-scale autonomous agency for large organizations.",
+    "features": ["Unlimited agent teams", "Full tool suite & custom tools", "24/7 dedicated support", "Self-improving workflows"]
+  }
+]

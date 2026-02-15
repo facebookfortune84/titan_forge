@@ -1,0 +1,17 @@
+[
+  {
+    "id": "task_001",
+    "department": "Marketing",
+    "description": "Create a blog post about the benefits of AI-powered software development. write file"
+  },
+  {
+    "id": "task_002",
+    "department": "Engineering",
+    "description": "Refactor the authentication module in the main application to use a more secure hashing algorithm. write file"
+  },
+  {
+    "id": "task_003",
+    "department": "Marketing",
+    "description": "Draft a series of social media posts for the launch of TitanForge. write file"
+  }
+]
