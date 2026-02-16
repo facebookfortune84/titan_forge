@@ -37,13 +37,13 @@ export default function LandingPageProPro() {
     // Fetch real metrics
     const fetchMetrics = async () => {
       try {
-        const response = await fetch("http://localhost:8000/dashboard");
+        const response = await fetch("http://localhost:8000/api/v1/dashboard/stats");
         if (response.ok) {
           const data = await response.json();
-          if (data.total_leads !== undefined) {
+          if (data.leads_count !== undefined) {
             setMetrics({
-              leads: data.total_leads || 0,
-              customers: data.customers || 0,
+              leads: data.leads_count || 0,
+              customers: data.customers_count || 0,
               traffic: Math.floor(Math.random() * 1000 + 100),
               conversionRate: data.conversion_rate || 0,
             });

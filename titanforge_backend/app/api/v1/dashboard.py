@@ -1,10 +1,11 @@
-"""Dashboard endpoint - serves real-time metrics HTML."""
+"""Dashboard endpoint - serves real-time metrics HTML and JSON."""
 
 from fastapi import APIRouter, Depends
 from fastapi.responses import HTMLResponse
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from datetime import datetime
+from pydantic import BaseModel
 
 from ...database import get_db
 from ... import db_models
@@ -12,9 +13,19 @@ from ... import db_models
 router = APIRouter(tags=["dashboard"])
 
 
-@router.get("/dashboard", response_class=HTMLResponse)
-async def get_dashboard_html(db: Session = Depends(get_db)):
-    """Visual sales dashboard with real database data."""
+class DashboardStats(BaseModel):
+    """Dashboard statistics schema."""
+    leads_count: int
+    customers_count: int
+    mrr: float
+    projected_annual: float
+    conversion_rate: float
+    timestamp: str
+
+
+@router.get("/api/v1/dashboard/stats", response_model=DashboardStats)
+async def get_dashboard_stats(db: Session = Depends(get_db)):
+    """JSON API endpoint - returns real-time metrics as JSON."""
     try:
         # Query real database data
         leads_count = db.query(db_models.Lead).filter(
@@ -45,6 +56,42 @@ async def get_dashboard_html(db: Session = Depends(get_db)):
         mrr = 0
         projected_annual = 0
         conversion_rate = 0
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    return DashboardStats(
+        leads_count=leads_count,
+        customers_count=customers_count,
+        mrr=mrr,
+        projected_annual=projected_annual,
+        conversion_rate=conversion_rate,
+        timestamp=timestamp
+    )
+
+
+@router.get("/dashboard", response_class=HTMLResponse)
+async def get_dashboard_html(db: Session = Depends(get_db)):
+    """Visual sales dashboard with real database data."""
+    try:
+        # Query real database data
+        leads_count = db.query(db_models.Lead).filter(
+            db_models.Lead.status != 'converted'
+        ).count() or 0
+        
+        customers_count = db.query(db_models.User).filter(
+            db_models.User.is_active == True
+        ).count() or 0
+        
+        # MRR calculation
+        mrr_result = db.query(func.sum(db_models.Product.unit_amount)).join(
+            db_models.Subscription
+        ).filter(
+            db_models.Subscription.status == 'active'
+        ).scalar() or 0
+        
+        mrr = mrr_result / 100
+        projected_annual = mrr * 12
+        
+        conversion_rate = (customers_count / leads_count * 100) if leads_count > 0 else 0
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     html_content = f"""
