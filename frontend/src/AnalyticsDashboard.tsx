@@ -1,13 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { AuthContext } from './App'; // Import AuthContext
-
-interface AnalyticsSummary {
-    total_users: number;
-    total_signups: number;
-    active_subscriptions: number;
-    mrr_estimate_usd: number;
-}
+import { AuthContext } from './App';
+import { adminAPI } from '@/services/api';
+import type { AnalyticsSummary } from '@/types/index';
 
 const AnalyticsDashboard: React.FC = () => {
     const [analytics, setAnalytics] = useState<AnalyticsSummary | null>(null);
@@ -20,19 +14,11 @@ const AnalyticsDashboard: React.FC = () => {
             setLoading(true);
             setError(null);
             try {
-                const token = localStorage.getItem('access_token');
-                if (!token) {
-                    throw new Error("No authentication token found.");
-                }
-                const response = await axios.get<AnalyticsSummary>('http://127.0.0.1:8000/analytics/summary', {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setAnalytics(response.data);
+                const data = await adminAPI.getAnalytics();
+                setAnalytics(data);
             } catch (err: any) {
                 console.error("Failed to fetch analytics:", err);
-                setError(err.response?.data?.detail || err.message || "Failed to load analytics data.");
+                setError(err.detail || err.message || "Failed to load analytics data.");
             } finally {
                 setLoading(false);
             }
@@ -71,8 +57,8 @@ const AnalyticsDashboard: React.FC = () => {
                     <p style={metricStyle}>{analytics.total_users}</p>
                 </div>
                 <div style={cardStyle}>
-                    <h3>Total Signups (Lifetime)</h3>
-                    <p style={metricStyle}>{analytics.total_signups}</p>
+                    <h3>New Signups (This Month)</h3>
+                    <p style={metricStyle}>{analytics.new_signups_this_month}</p>
                 </div>
                 <div style={cardStyle}>
                     <h3>Active Subscriptions</h3>
@@ -80,7 +66,7 @@ const AnalyticsDashboard: React.FC = () => {
                 </div>
                 <div style={cardStyle}>
                     <h3>Estimated MRR (USD)</h3>
-                    <p style={metricStyle}>${analytics.mrr_estimate_usd.toFixed(2)}</p>
+                    <p style={metricStyle}>${analytics.mrr_estimate.toFixed(2)}</p>
                 </div>
             </div>
 

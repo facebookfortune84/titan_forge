@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from './App'; // Import AuthContext
+import { AuthContext } from './App';
+import { authAPI } from '@/services/api';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const authContext = useContext(AuthContext);
 
@@ -17,28 +18,19 @@ const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+        setLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/token', new URLSearchParams({
-                username: email,
-                password: password,
-            }), {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            });
-            localStorage.setItem('access_token', response.data.access_token);
-            // Fetch user details
-            const userResponse = await axios.get('http://127.0.0.1:8000/users/me/', {
-                headers: {
-                    Authorization: `Bearer ${response.data.access_token}`
-                }
-            });
+            const tokens = await authAPI.login(email, password);
+            localStorage.setItem('access_token', tokens.access_token);
+            const user = await authAPI.getCurrentUser();
             authContext.setIsAuthenticated(true);
-            authContext.setUser(userResponse.data);
-            navigate('/dashboard'); // Redirect to dashboard after login
+            authContext.setUser(user);
+            navigate('/dashboard');
         } catch (err: any) {
-            setError(err.response?.data?.detail || 'Login failed');
+            setError(err.detail || 'Login failed');
             console.error('Login error:', err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -71,9 +63,10 @@ const LoginPage: React.FC = () => {
                 </div>
                 <button
                     type="submit"
-                    style={{ padding: '10px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                    disabled={loading}
+                    style={{ padding: '10px 15px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', opacity: loading ? 0.6 : 1 }}
                 >
-                    Login
+                    {loading ? 'Logging in...' : 'Login'}
                 </button>
             </form>
             <p style={{ textAlign: 'center', marginTop: '20px' }}>

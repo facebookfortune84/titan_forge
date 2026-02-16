@@ -1,0 +1,139 @@
+{
+  "phase": "comprehensive",
+  "timestamp": "2026-02-16T07:14:48.037331",
+  "tests": [
+    {
+      "phase": "PHASE 3",
+      "test": "Pricing: /api/v1/pricing",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.070853",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "Pricing: /api/v1/pricing/tiers",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.086343",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "Pricing: /api/v1/pricing/basic",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.102027",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "Pricing: /api/v1/pricing/pro",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.138841",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "Pricing: /api/v1/pricing/one-time",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.166511",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "User registration for checkout",
+      "passed": false,
+      "timestamp": "2026-02-16T07:14:48.319214",
+      "details": "HTTP 500"
+    },
+    {
+      "phase": "PHASE 3",
+      "test": "Subscription creation",
+      "passed": false,
+      "timestamp": "2026-02-16T07:14:48.319214",
+      "details": "No auth token"
+    },
+    {
+      "phase": "PHASE 4",
+      "test": "Lead capture creation",
+      "passed": false,
+      "timestamp": "2026-02-16T07:14:48.675468",
+      "details": "HTTP 400"
+    },
+    {
+      "phase": "PHASE 5",
+      "test": "Financial: /api/v1/reports/income",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.698029",
+      "details": "HTTP 404"
+    },
+    {
+      "phase": "PHASE 5",
+      "test": "Financial: /api/v1/reports/expenses",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.711798",
+      "details": "HTTP 404"
+    },
+    {
+      "phase": "PHASE 5",
+      "test": "Financial: /api/v1/reports/revenue",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.724026",
+      "details": "HTTP 404"
+    },
+    {
+      "phase": "PHASE 8",
+      "test": "SQL injection protection",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.740116",
+      "details": "HTTP 200"
+    },
+    {
+      "phase": "PHASE 8",
+      "test": "XSS input handling",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.756158",
+      "details": "HTTP 422"
+    },
+    {
+      "phase": "PHASE 8",
+      "test": "Unauthorized access blocked",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.772571",
+      "details": "HTTP 401"
+    },
+    {
+      "phase": "PHASE 8",
+      "test": "Invalid token rejection",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.792767",
+      "details": "HTTP 401"
+    },
+    {
+      "phase": "PHASE 9",
+      "test": "Agent listing",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.858272",
+      "details": "HTTP 200 - Found 8 agents"
+    },
+    {
+      "phase": "PHASE 9",
+      "test": "Graph nodes retrieval",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.873852",
+      "details": "HTTP 200 - Found 7 nodes"
+    },
+    {
+      "phase": "PHASE 9",
+      "test": "Graph edges retrieval",
+      "passed": true,
+      "timestamp": "2026-02-16T07:14:48.892559",
+      "details": "HTTP 200 - Found 8 edges"
+    }
+  ],
+  "summary": {
+    "total_tests": 18,
+    "passed": 15,
+    "failed": 3,
+    "success_rate": "83%",
+    "timestamp": "2026-02-16T07:14:48.893453"
+  }
+}

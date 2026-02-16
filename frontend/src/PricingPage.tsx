@@ -1,29 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from "@/App";
+import { productAPI } from '@/services/api';
+import type { Product } from '@/types/index';
 
-interface PricingTier {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  features: string[];
+interface PricingTier extends Product {
+  price: number; // Price in dollars for display
 }
 
 const PricingPage: React.FC = () => {
   const [tiers, setTiers] = useState<PricingTier[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const auth = useContext(AuthContext);
+  if (!auth) { return <div>Loading...</div>; }
+  const { isAuthenticated } = auth;
 
   useEffect(() => {
-    // In a real app, you might fetch this from an API
     const fetchPricing = async () => {
-        try {
-            const res = await axios.get('/pricing.json'); // It's in the public folder
-            setTiers(res.data);
-        } catch (e) {
-            console.error("Could not load pricing.json", e);
+      setLoading(true);
+      setError(null);
+      try {
+        if (!isAuthenticated) {
+          setTiers([]);
+          return;
         }
+        const products = await productAPI.getProducts();
+        const formattedTiers: PricingTier[] = products.map((product) => ({
+          ...product,
+          price: product.price / 100, // Convert cents to dollars
+        }));
+        setTiers(formattedTiers);
+      } catch (err: any) {
+        console.error("Could not load pricing from backend", err);
+        setError(err.detail || "Failed to load pricing");
+      } finally {
+        setLoading(false);
+      }
     };
     fetchPricing();
-  }, []);
+  }, [isAuthenticated]);
+
+  const handleSubscribe = async (productId: string) => {
+    if (!isAuthenticated) {
+      alert("Please log in to subscribe.");
+      return;
+    }
+
+    try {
+      const session = await productAPI.createCheckoutSession(productId);
+      window.location.href = session.url;
+    } catch (error: any) {
+      console.error("Error creating checkout session:", error);
+        alert("Failed to initiate payment. Please try again later.");
+    }
+  };
 
   return (
     <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
@@ -35,8 +65,20 @@ const PricingPage: React.FC = () => {
           <ul style={{ listStyle: 'none', padding: 0, textAlign: 'left', margin: '20px 0' }}>
             {tier.features.map(feature => <li key={feature}>✔️ {feature}</li>)}
           </ul>
-          <button disabled style={{ padding: '10px 20px', fontSize: '1em', cursor: 'not-allowed', backgroundColor: '#6c757d', color: 'white', border: 'none', borderRadius: '5px' }}>
-            Buy Now (Mock)
+          <button
+            onClick={() => handleSubscribe(tier.id)}
+            disabled={!isAuthenticated}
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '1em', 
+              cursor: isAuthenticated ? 'pointer' : 'not-allowed', 
+              backgroundColor: isAuthenticated ? '#007bff' : '#6c757d', 
+              color: 'white', 
+              border: 'none', 
+              borderRadius: '5px' 
+            }}
+          >
+            {isAuthenticated ? "Buy Now" : "Log in to Buy"}
           </button>
         </div>
       ))}

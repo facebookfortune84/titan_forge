@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { authAPI } from '@/services/api';
 
 const RegisterPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -8,25 +8,25 @@ const RegisterPage: React.FC = () => {
     const [fullName, setFullName] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
         setSuccess('');
+        setLoading(true);
         try {
-            await axios.post('http://127.0.0.1:8000/register', {
-                email,
-                password,
-                full_name: fullName,
-            });
+            await authAPI.register(email, password, fullName);
             setSuccess('Registration successful! Redirecting to login...');
             setTimeout(() => {
                 navigate('/login');
             }, 2000);
         } catch (err: any) {
-            setError(err.response?.data?.detail || 'Registration failed');
+            setError(err.detail || 'Registration failed');
             console.error('Registration error:', err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -70,9 +70,10 @@ const RegisterPage: React.FC = () => {
                 </div>
                 <button
                     type="submit"
-                    style={{ padding: '10px 15px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                    disabled={loading}
+                    style={{ padding: '10px 15px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', opacity: loading ? 0.6 : 1 }}
                 >
-                    Register
+                    {loading ? 'Registering...' : 'Register'}
                 </button>
             </form>
             <p style={{ textAlign: 'center', marginTop: '20px' }}>

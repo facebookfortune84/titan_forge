@@ -1,0 +1,42 @@
+[
+  {
+    "test": "Backend Service Health (Root)",
+    "status": "PASS",
+    "response_code": 200,
+    "error": null,
+    "duration_ms": 29.38,
+    "timestamp": "2026-02-16T11:31:52.189758"
+  },
+  {
+    "test": "ROI PDF Endpoint (POST)",
+    "status": "PASS",
+    "response_code": 200,
+    "error": null,
+    "duration_ms": 27.31,
+    "timestamp": "2026-02-16T11:31:52.218197"
+  },
+  {
+    "test": "Dashboard Endpoint (GET)",
+    "status": "PASS",
+    "response_code": 200,
+    "error": null,
+    "duration_ms": 16.38,
+    "timestamp": "2026-02-16T11:31:52.235110"
+  },
+  {
+    "test": "Pricing Endpoint (GET)",
+    "status": "PASS",
+    "response_code": 200,
+    "error": null,
+    "duration_ms": 7.16,
+    "timestamp": "2026-02-16T11:31:52.243380"
+  },
+  {
+    "test": "Login Endpoint (POST)",
+    "status": "PASS",
+    "response_code": 401,
+    "error": null,
+    "duration_ms": 26.93,
+    "timestamp": "2026-02-16T11:31:52.270855"
+  }
+]
