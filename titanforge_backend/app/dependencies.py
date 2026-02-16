@@ -43,6 +43,11 @@ async def get_current_active_user(
 def send_agent_message(
     recipient_id: str, sender_id: str, message_content: Dict[str, Any], r: redis.Redis
 ) -> None:
-    message_json = json.dumps({"sender_id": sender_id, "message": message_content})
-    r.rpush(recipient_id, message_json)
+    try:
+        message_json = json.dumps({"sender_id": sender_id, "message": message_content})
+        r.rpush(recipient_id, message_json)
+    except Exception as e:
+        # Log but don't fail - agent messaging is optional
+        print(f"[WARNING] Failed to send agent message: {e}")
+        pass
 

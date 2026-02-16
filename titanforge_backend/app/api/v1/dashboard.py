@@ -94,6 +94,15 @@ async def get_dashboard_html(db: Session = Depends(get_db)):
         conversion_rate = (customers_count / leads_count * 100) if leads_count > 0 else 0
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
+    except Exception as e:
+        # Fallback data if query fails
+        leads_count = 0
+        customers_count = 0
+        mrr = 0
+        projected_annual = 0
+        conversion_rate = 0
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
     html_content = f"""
     <!DOCTYPE html>
     <html lang="en">

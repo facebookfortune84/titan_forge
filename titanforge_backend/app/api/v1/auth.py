@@ -43,33 +43,41 @@ async def register(
     # Create user
     new_user = crud.create_user(db=db, user=user)
     
-    # Send user_signup event to Analytics Agent
-    send_agent_message(
-        recipient_id="analytics_agent",
-        sender_id="mcp",
-        message_content={
-            "action": "record_event",
-            "event_type": "user_signup",
-            "user_id": str(new_user.id),
-            "payload": {"email": new_user.email},
-        },
-        r=r,
-    )
-    
-    # Send welcome email to Notification Agent
-    send_agent_message(
-        recipient_id="notification_agent",
-        sender_id="mcp",
-        message_content={
-            "action": "process_notification_request",
-            "notification_type": "welcome",
-            "data": {
-                "user_email": new_user.email,
-                "user_name": new_user.full_name or new_user.email.split("@")[0],
+    # Send user_signup event to Analytics Agent (non-blocking)
+    try:
+        send_agent_message(
+            recipient_id="analytics_agent",
+            sender_id="mcp",
+            message_content={
+                "action": "record_event",
+                "event_type": "user_signup",
+                "user_id": str(new_user.id),
+                "payload": {"email": new_user.email},
             },
-        },
-        r=r,
-    )
+            r=r,
+        )
+    except Exception as e:
+        print(f"Analytics agent message failed: {e}")
+        # Don't fail registration if agent communication fails
+    
+    # Send welcome email to Notification Agent (non-blocking)
+    try:
+        send_agent_message(
+            recipient_id="notification_agent",
+            sender_id="mcp",
+            message_content={
+                "action": "process_notification_request",
+                "notification_type": "welcome",
+                "data": {
+                    "user_email": new_user.email,
+                    "user_name": new_user.full_name or new_user.email.split("@")[0],
+                },
+            },
+            r=r,
+        )
+    except Exception as e:
+        print(f"Notification agent message failed: {e}")
+        # Don't fail registration if agent communication fails
     
     return new_user
 

@@ -17,8 +17,8 @@ import {
   Lead,
 } from '@/types/index';
 
-// API Base URL from environment or default
-const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'http://127.0.0.1:8000';
+// API Base URL from environment or default to localhost (matching CORS config)
+const API_BASE_URL = (import.meta as any).env.VITE_API_URL || 'http://localhost:8000';
 
 // Create axios instance with default config
 const apiClient = axios.create({

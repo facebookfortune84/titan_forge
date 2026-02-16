@@ -491,7 +491,9 @@ async def generate_roi_pdf(
         template = Template(HTML_TEMPLATE)
         html_content = template.render(**context)
         
-        # Create lead record for this PDF generation
+        # Create or update lead record for this PDF generation
+        from sqlalchemy.exc import IntegrityError
+        
         lead = db_models.Lead(
             email=request.email,
             name=request.company_name,
@@ -500,8 +502,17 @@ async def generate_roi_pdf(
             status="lead_magnet_downloaded",
             message=json.dumps({"company_size": request.company_size, "annual_spend": annual_spend})
         )
-        db.add(lead)
-        db.commit()
+        try:
+            db.add(lead)
+            db.commit()
+        except IntegrityError:
+            # Email already exists - just update the status
+            db.rollback()
+            existing_lead = db.query(db_models.Lead).filter(db_models.Lead.email == request.email).first()
+            if existing_lead:
+                existing_lead.status = "lead_magnet_downloaded"
+                existing_lead.message = json.dumps({"company_size": request.company_size, "annual_spend": annual_spend})
+                db.commit()
         
         return {
             "status": "success",

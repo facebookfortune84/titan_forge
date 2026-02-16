@@ -57,10 +57,11 @@ app = FastAPI(
 
 origins = [
     "http://localhost",
-    "http://localhost:5173",  # Assuming your frontend runs on port 5173
-    "http://localhost:5174",  # Added for actual frontend port
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://127.0.0.1",
     "http://127.0.0.1:5173",
-    "http://127.0.0.1:5174",  # Added for actual frontend port
+    "http://127.0.0.1:5174",
 ]
 
 app.add_middleware(
@@ -80,6 +81,13 @@ async def startup_event():
     # provisioning_agent = ProvisioningAgent()
     # notification_agent = NotificationAgent()
     # analytics_agent = AnalyticsAgent()
+
+# --- Root Endpoint ---
+@app.get("/")
+async def root():
+    """Root endpoint - health check for TitanForge MCP"""
+    return {"message": "TitanForge MCP is online. Awaiting agent instructions."}
+
 
 # Include API routers
 app.include_router(landing_page_router, prefix="/api/v1")
