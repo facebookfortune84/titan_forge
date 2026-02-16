@@ -65,9 +65,15 @@ export const authAPI = {
 
   async login(email: string, password: string): Promise<AuthTokens> {
     try {
-      const response = await apiClient.post<AuthTokens>('/api/v1/auth/login', {
-        email,
-        password,
+      // Create FormData as required by OAuth2PasswordRequestForm
+      const formData = new FormData();
+      formData.append('username', email); // FastAPI OAuth2 form expects 'username'
+      formData.append('password', password);
+
+      const response = await apiClient.post<AuthTokens>('/api/v1/auth/login', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
       return response.data;
     } catch (error) {
@@ -77,7 +83,9 @@ export const authAPI = {
 
   async getCurrentUser(): Promise<User> {
     try {
-      const response = await apiClient.get<User>('/api/v1/auth/me');
+      // FIX: Your main.py defines this as /users/me/ (with trailing slash)
+      // but your api.ts was hitting /api/v1/auth/me
+      const response = await apiClient.get<User>('/users/me/');
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -106,27 +114,25 @@ export const authAPI = {
 
 // ============ TASK ENDPOINTS ============
 export const taskAPI = {
-  async getTasks(): Promise<Task[]> {
-    try {
-      const response = await apiClient.get<Record<string, Task>>('/tasks');
-      return Object.values(response.data);
-    } catch (error) {
-      throw handleError(error as AxiosError<ApiError>);
-    }
-  },
-
   async submitGoal(goal: string): Promise<Task> {
     try {
-      const response = await apiClient.post<Task>('/goals', { goal });
+      // FIX: Your backend 'Goal' class expects { description: string }
+      // Your current code was sending { goal: goal }
+      const response = await apiClient.post<Task>('/goals', { description: goal });
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
     }
   },
-
+ 
   async updateTask(taskId: string, status: string): Promise<Task> {
     try {
-      const response = await apiClient.put<Task>(`/tasks/${taskId}`, { status });
+      // FIX: Your backend 'TaskUpdate' model REQUIRES 'agent_id'
+      // You must pass the agent_id (e.g., 'mcp' or 'ceo') or it will 422
+      const response = await apiClient.put<Task>(`/tasks/${taskId}`, { 
+        status,
+        agent_id: 'mcp' 
+      });
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);

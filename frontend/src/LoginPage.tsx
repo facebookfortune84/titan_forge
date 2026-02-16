@@ -27,10 +27,23 @@ const LoginPage: React.FC = () => {
             authContext.setUser(user);
             navigate('/dashboard');
         } catch (err: any) {
-            setError(err.detail || 'Login failed');
+            // Check if it's a FastAPI validation array [{msg: ...}] or a simple string
+            const rawDetail = err.detail;
+            let displayMessage = 'Login failed';
+
+            if (Array.isArray(rawDetail)) {
+                // Extracts the specific message like "field required" or "invalid email"
+                displayMessage = rawDetail.map(d => `${d.loc[1]}: ${d.msg}`).join(', ');
+            } else if (typeof rawDetail === 'string') {
+                displayMessage = rawDetail;
+            } else if (err.message) {
+                displayMessage = err.message;
+            }
+
+            setError(displayMessage);
             console.error('Login error:', err);
         } finally {
-            setLoading(false);
+          setLoading(false);
         }
     };
 
