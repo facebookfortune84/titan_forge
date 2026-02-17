@@ -1,0 +1,380 @@
+# TitanForge Positioning Layer
+# Messaging, CTAs, copy direction for all channels
+# Agents use this to generate domain-specific marketing copy
+
+# Primary Message (Hero / Homepage)
+primaryMessage:
+  headline: "Ship code in days, not weeks. Meet your AI development team."
+  subheadline: "TitanForge agents handle testing, code review, documentation, and deployment. You focus on the parts that matter."
+  ctaPrimary: "Start Free (No Credit Card)"
+  ctaSecondary: "See How It Works →"
+  visual_direction: "Show AI agents working in parallel, delivering results fast"
+
+# Value Propositions (Core benefits)
+valueProps:
+  - headline: "Write 10x faster"
+    description: "Agents generate boilerplate and handle repetitive tasks. Your team writes only the critical parts."
+    icon: "zap"
+    supporting_stat: "40% faster feature delivery"
+    use_in: "Landing page, ads, social media"
+  
+  - headline: "Ship with confidence"
+    description: "Automated testing, code review, and deployment catch issues before they reach production."
+    icon: "shield"
+    supporting_stat: "60% fewer bugs"
+    use_in: "Enterprise messaging, pricing page"
+  
+  - headline: "Hire fewer people"
+    description: "AI agents work 24/7. Deliver the same output with 30-50% fewer developers."
+    icon: "users"
+    supporting_stat: "50% lower dev costs"
+    use_in: "Agency messaging, CFO/finance conversations"
+  
+  - headline: "Deploy daily, not weekly"
+    description: "Agents automate the entire release pipeline. Your code ships faster, safer, with zero manual steps."
+    icon: "rocket"
+    supporting_stat: "10x more deployments per month"
+    use_in: "DevOps/Infrastructure messaging"
+
+# Page-Specific Copy Frameworks
+pages:
+  landing:
+    page_name: "LandingPagePro.tsx"
+    h1: "Ship code in days, not weeks. Meet your AI development team."
+    meta_title: "TitanForge: AI Agents for Faster Development | Automate Testing, Code Review, Deployment"
+    meta_description: "Build faster with intelligent AI agents. 40% quicker delivery, 60% fewer bugs, 50% lower costs. No credit card needed."
+    
+    sections:
+      - section_title: "Hero Section"
+        headline: "Ship code in days, not weeks."
+        subheadline: "TitanForge agents handle testing, code review, documentation, and deployment. You focus on the parts that matter."
+        cta_primary: "Start Free Today (No Card Required)"
+        cta_secondary: "Watch 2-min demo"
+        background: "Dark, modern, shows agents working in parallel"
+      
+      - section_title: "The Problem"
+        headline: "Your team is drowning in repetitive work."
+        copy: "Developers spend 60% of time on repetitive tasks: boilerplate, testing, code review, documentation. That's time wasted when you could be innovating. You either hire more people (expensive, slow) or accept slower delivery."
+        supporting_stat: "Average dev spends 12+ hours per week on code review alone"
+      
+      - section_title: "The Solution"
+        headline: "Meet your AI development team."
+        copy: "TitanForge is a swarm of AI agents, each specialized in a part of the dev lifecycle. Code generation. Testing. Review. Documentation. Deployment. They work together. They learn from your codebase. They handle the boring stuff so you can innovate."
+        visual: "Show 5-6 agents (icons) representing different specialties, connected"
+      
+      - section_title: "How It Works (3 Steps)"
+        step_1:
+          headline: "1. Describe your task"
+          description: "Tell agents what you need. A new feature. A refactor. Tests for legacy code."
+        step_2:
+          headline: "2. Agents execute"
+          description: "Our swarm analyzes your codebase, generates solutions, reviews and refines output."
+        step_3:
+          headline: "3. Review and merge"
+          description: "See exactly what agents did. Approve, modify, or reject. You stay in control."
+      
+      - section_title: "Results"
+        stat_1: "40% faster feature delivery"
+        stat_2: "60% fewer bugs"
+        stat_3: "50% lower development costs"
+        stat_4: "24/7 availability"
+        copy_supporting: "Real results from real users building real software."
+      
+      - section_title: "Social Proof"
+        testimonials:
+          - quote: "We shipped Q3 features in Q2. That's a 3-month runway gain."
+            author: "Sarah Chen, CTO at TechStartup"
+          - quote: "Our code quality improved while we hired 30% fewer people."
+            author: "David Martinez, VP Engineering at DevAgency"
+        user_count: "500+ developers and teams already using TitanForge"
+      
+      - section_title: "Pricing Tiers"
+        copy: "Pick a plan. Start free. Scale whenever you're ready."
+        cta: "View All Plans"
+      
+      - section_title: "FAQ"
+        questions:
+          - q: "Will agents replace developers?"
+            a: "No. They replace drudgery. Developers become architects and innovators, not copy-paste machines."
+          - q: "How good is AI code?"
+            a: "Good. Our agents are trained on thousands of production codebases. They review and refine their own output."
+          - q: "Is my code safe?"
+            a: "Yes. Your code never leaves your infrastructure. Agents work within your environment."
+          - q: "Can I use this with my tech stack?"
+            a: "Probably. We support Node, Python, Go, Rust, Java, and more. Custom stacks via API."
+      
+      - section_title: "CTA Section"
+        headline: "Ready to ship faster?"
+        cta_primary: "Start Your Free Trial"
+        cta_secondary: "Schedule a demo"
+        copy: "No credit card. Full access. 7-day free trial."
+  
+  pricing:
+    page_name: "PricingPage.tsx"
+    page_title: "Simple, Transparent Pricing"
+    page_subtitle: "Pick a plan. Scale whenever you're ready."
+    meta_title: "TitanForge Pricing: Plans for Solo Devs to Enterprises"
+    meta_description: "Flexible pricing from $19/month for individuals to custom Enterprise plans. All plans include core AI agent features."
+    
+    intro_copy: "Start with Starter. Upgrade anytime. No contracts. Cancel anytime."
+    
+    tier_1:
+      name: "Starter"
+      price: "$19/month"
+      price_annual: "$199/year (15% savings)"
+      target_user: "For solo developers and hobbyists"
+      description: "Everything you need to get started with AI agents."
+      features:
+        - "1 concurrent agent task"
+        - "1,000 API calls/month"
+        - "Basic code generation"
+        - "Community support"
+        - "Access to dashboard"
+      cta: "Try Free"
+      cta_subtext: "No credit card required"
+    
+    tier_2:
+      name: "Pro"
+      price: "$99/month"
+      price_annual: "$999/year (16% savings)"
+      target_user: "For small teams and agencies"
+      description: "Everything Starter has, plus advanced features to scale."
+      features:
+        - "5 concurrent agent tasks"
+        - "10,000 API calls/month"
+        - "Advanced code review"
+        - "Team collaboration"
+        - "Priority email support"
+        - "Basic analytics"
+      cta: "Start Free Trial"
+      cta_subtext: "7 days, then $99/month"
+      popular: true
+      popular_badge: "Most Popular"
+    
+    tier_3:
+      name: "Enterprise"
+      price: "Custom"
+      price_annual: "Custom annual pricing"
+      target_user: "For large organizations"
+      description: "Unlimited everything. White-glove support. Custom integrations."
+      features:
+        - "Unlimited concurrent tasks"
+        - "Unlimited API calls"
+        - "Custom agent development"
+        - "Dedicated account manager"
+        - "24/7 phone/email support with SLA"
+        - "Advanced security & compliance"
+        - "On-premises deployment option"
+        - "Custom integrations (Slack, GitHub, JIRA, etc.)"
+      cta: "Contact Sales"
+      cta_subtext: "Let's talk about your needs"
+    
+    comparison_table:
+      - feature: "Concurrent Agent Tasks"
+        starter: "1"
+        pro: "5"
+        enterprise: "Unlimited"
+      - feature: "API Calls per Month"
+        starter: "1,000"
+        pro: "10,000"
+        enterprise: "Unlimited"
+      - feature: "Code Generation"
+        starter: "✓"
+        pro: "✓"
+        enterprise: "✓"
+      - feature: "Automated Testing"
+        starter: "✓"
+        pro: "✓"
+        enterprise: "✓"
+      - feature: "Advanced Code Review"
+        starter: "—"
+        pro: "✓"
+        enterprise: "✓"
+      - feature: "Team Collaboration"
+        starter: "—"
+        pro: "✓"
+        enterprise: "✓"
+      - feature: "Priority Support"
+        starter: "Community"
+        pro: "Email (12h)"
+        enterprise: "24/7 SLA"
+      - feature: "Custom Integrations"
+        starter: "—"
+        pro: "—"
+        enterprise: "✓"
+    
+    faq:
+      - question: "Can I change plans?"
+        answer: "Yes. Upgrade or downgrade anytime. Changes take effect immediately."
+      - question: "What happens if I hit my API limit?"
+        answer: "We'll notify you. You can upgrade anytime. Or use again next month."
+      - question: "Do you offer discounts for annual billing?"
+        answer: "Yes. 15-16% savings with annual billing on all plans."
+      - question: "Is there a free tier?"
+        answer: "Yes. 7-day free trial on Pro. Full access, no credit card needed."
+  
+  blog:
+    page_name: "Blog.tsx"
+    page_title: "Learn How AI Agents Are Reshaping Development"
+    page_subtitle: "Tutorials, case studies, and industry insights from our team and community."
+    meta_title: "TitanForge Blog: AI Development, Automation, Best Practices"
+    meta_description: "Read about AI agents for software development, automation techniques, and real-world case studies from TitanForge users."
+    
+    blog_post_template:
+      meta_title_pattern: "[Topic] | TitanForge Blog"
+      meta_description_pattern: "[1-2 sentence summary]. Read the full post on TitanForge."
+      h1_pattern: "[Actionable headline or question]"
+      intro_copy: "Start with hook. Problem statement. What reader will learn."
+      body_structure:
+        - "H2: The Problem"
+        - "H2: Why It Matters"
+        - "H2: How [Solution]"
+        - "H2: Real-World Example (case study or screenshot)"
+        - "H2: Getting Started"
+      cta_position: "End of each post"
+      cta_text: "Want to try agents on your code? Start free with TitanForge"
+      internal_linking: "Link to relevant product pages, other blog posts, pricing"
+    
+    content_topics:
+      - category: "Tutorials"
+        topics:
+          - "How to Generate API Endpoints with AI Agents"
+          - "Automated Testing: Let AI Write Your Tests"
+          - "Code Review at Scale: How AI Agents Improve Quality"
+      
+      - category: "Case Studies"
+        topics:
+          - "How TechStartup Shipped Q3 in Q2 with AI Agents"
+          - "DevAgency Cut Hiring by 30% Without Losing Quality"
+      
+      - category: "Industry Insights"
+        topics:
+          - "The Rise of Agentic AI: Beyond Copilot"
+          - "Why Traditional Dev Outsourcing is Dead"
+          - "The Future of Software Development"
+      
+      - category: "Best Practices"
+        topics:
+          - "5 Ways to Get the Most Out of AI Agents"
+          - "Common Mistakes When Using AI for Code"
+          - "Building Quality Into Your AI-Assisted Workflow"
+
+# Email Messaging Frameworks
+emailMessaging:
+  subjectLineStyle: "Direct, benefit-focused, curiosity, urgency (but never spammy)"
+  subjectLinePatterns:
+    - "[Benefit] in [timeframe]"
+    - "[Number] ways to [desired outcome]"
+    - "[Pain point]: Here's how we solve it"
+    - "Your [product] is ready"
+  
+  exampleSubjectLines:
+    welcome_sequence:
+      email_1: "Welcome to TitanForge 🚀 (Here's how to get started)"
+      email_2: "Ship your first task in 10 minutes"
+      email_3: "See how others are 40% faster"
+    
+    nurture_sequence:
+      email_1: "[Case Study] How DevAgency cut hiring by 30%"
+      email_2: "Ready to 10x your team? Here's how"
+      email_3: "This is why competitors are adopting AI agents"
+    
+    upgrade_sequence:
+      email_1: "You've hit your task limit (here's what's next)"
+      email_2: "Pro users are shipping 5x faster. Here's why"
+      email_3: "Special offer: Upgrade and save 20%"
+  
+  tone:
+    - "Helpful, not salesy"
+    - "Specific benefits, not buzzwords"
+    - "Direct and clear"
+    - "Assume reader is skeptical; prove value"
+
+# Common Objections & Rebuttals
+objectionsAndRebuttals:
+  - objection: "AI code quality is bad"
+    rebuttal: "Our agents are trained on thousands of production codebases. They review and refine their own output. Our users report 60% fewer bugs."
+    rebuttal_short: "Quality is higher. Our users see 60% fewer bugs."
+  
+  - objection: "This will replace developers"
+    rebuttal: "No. It replaces drudgery. Developers become architects and innovators, not copy-paste machines. You still need humans for creative decisions."
+    rebuttal_short: "It replaces tedious tasks, not people."
+  
+  - objection: "Too expensive"
+    rebuttal: "At $99/month, Pro costs less than 1 day of a senior developer. You save that in faster delivery in week 1. ROI is immediate."
+    rebuttal_short: "$99/month is 1 day of dev cost. You save that in week 1."
+  
+  - objection: "Learning curve is steep"
+    rebuttal: "Nope. Describe your task in plain English. Agents handle the rest. 80% of users are productive in first session."
+    rebuttal_short: "If you can describe code, you can use TitanForge."
+  
+  - objection: "What about my proprietary code security?"
+    rebuttal: "Your code stays on your infrastructure. Agents work within your environment. We never send your code to third parties."
+    rebuttal_short: "Your code stays on your hardware. Always."
+
+# Seasonal / Campaign Messaging
+campaigns:
+  hiring_season:
+    headline: "Hire fewer people. Deliver more. TitanForge for teams that grow without headcount."
+    copy: "Developers are expensive. AI agents are not. Scale your output without scaling your team."
+    cta: "See How It Works"
+    email_subject: "Hire fewer devs, ship faster"
+    channel: "LinkedIn, Twitter, email"
+  
+  speed_focused:
+    headline: "Your competitors are shipping 2x faster. Here's how."
+    copy: "While you're debating approaches, they're already shipping. AI agents make this possible."
+    cta: "Try Free"
+    email_subject: "Ship faster than competitors"
+    channel: "Targeted ads, blog, email"
+  
+  code_quality:
+    headline: "Reduce bugs by 60% without hiring more QA."
+    copy: "Automated testing, code review, and validation catch issues before they reach production."
+    cta: "See the Demo"
+    email_subject: "Higher quality, lower cost"
+    channel: "Email, product blog, industry forums"
+  
+  enterprise_vpo:
+    headline: "Unlock engineering velocity at scale."
+    copy: "Competitive advantage starts with speed. Agents accelerate your entire pipeline."
+    cta: "Schedule a Demo"
+    email_subject: "Let's talk about your engineering challenges"
+    channel: "LinkedIn, sales outreach, conferences"
+
+# Social Media Copy Hooks (Twitter/X, LinkedIn, etc.)
+socialMediaHooks:
+  twitter:
+    - "Our agents just wrote 200 lines of code and tests. Took 30 seconds. Your dev team is watching."
+    - "Code review used to take 3 hours. Now it takes 30 seconds. AI agents > manual processes."
+    - "Shipping 5x more features with the same team. No, this isn't a startup fantasy. It's TitanForge."
+  
+  linkedin:
+    - "In 2024, shipping code fast is a competitive advantage. Agents give you that advantage."
+    - "Your best developers are tired of boilerplate. Let AI handle it. Watch what they build next."
+    - "We just cut our feature delivery time from 2 weeks to 2 days. Here's what changed: [link to blog]"
+  
+  reddit:
+    - "[r/programming] We built AI agents for developers (open dev diary). AMA"
+    - "[r/Python] Just released agents that auto-generate Python tests. Early access [link]"
+    - "[r/SaaS] Built a $100K MRR SaaS with 2 people using AI agents. Here's how. [blog link]"
+
+# Ad Copy Templates (For Future Paid Acquisition)
+adCopyTemplates:
+  search_ads:
+    headline_1: "Ship Code 2x Faster"
+    headline_2: "AI Agents for Developers"
+    headline_3: "Free Trial | No Card"
+    description: "Automate testing, code review, docs. Focus on creative work. 40% faster delivery."
+    landing_page: "/pricing"
+  
+  social_ads:
+    headline: "Skip the boring code. Build the important stuff."
+    copy: "AI agents handle testing, review, docs. You focus on innovation. Start free."
+    cta: "Try Free"
+    image_style: "Modern, developer-focused, shows agents working in parallel"
+  
+  retargeting_ads:
+    headline: "You were on TitanForge. Here's why 500+ developers came back:"
+    copy: "40% faster shipping. 60% fewer bugs. 50% lower costs. Start your free trial."
+    cta: "Start Free Today"

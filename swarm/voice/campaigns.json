@@ -1,0 +1,28 @@
+{
+  "id": "voice_business_profile",
+  "name": "TitanForge Voice Outreach Profile",
+  "version": "1.0",
+  "campaigns": [
+    {
+      "id": "new_lead_welcome",
+      "name": "New Lead Welcome Call",
+      "targetSegment": "solo_devs",
+      "trigger": "lead_form_submitted",
+      "objective": "Warm welcome, qualify, trial signup",
+      "successMetric": "trial_signup_rate"
+    },
+    {
+      "id": "trial_expiring_upsell",
+      "name": "Trial Expiring - Upgrade",
+      "targetSegment": "solo_devs",
+      "trigger": "trial_expiring_2_days",
+      "objective": "Upsell to Pro plan",
+      "successMetric": "conversion_to_paid"
+    }
+  ],
+  "compliance": {
+    "identification": "Always say: 'Hi, this is [NAME] from TitanForge'",
+    "optOut": "Always offer: 'Say STOP to be removed'",
+    "maxAttempts": 3
+  }
+}

@@ -158,23 +158,5 @@ async def make_user_superuser(
     return user_to_update
 
 
-@router.get("/agents", response_model=List[str]) # Define response model
-async def get_registered_agents():
-    """
-    Returns a list of all currently registered agent IDs.
-    Publicly accessible (no authentication required).
-    """
-    # Return a hardcoded list of agents for now
-    # This will be populated from the swarm when fully integrated
-    agents = [
-        "ceo_agent",
-        "analytics_agent", 
-        "execution_agent",
-        "communication_agent",
-        "planning_agent",
-        "research_agent",
-        "innovation_agent",
-        "security_agent"
-    ]
-    return agents
+
 

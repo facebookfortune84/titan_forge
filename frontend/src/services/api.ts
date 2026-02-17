@@ -83,9 +83,7 @@ export const authAPI = {
 
   async getCurrentUser(): Promise<User> {
     try {
-      // FIX: Your main.py defines this as /users/me/ (with trailing slash)
-      // but your api.ts was hitting /api/v1/auth/me
-      const response = await apiClient.get<User>('/users/me/');
+      const response = await apiClient.get<User>('/api/v1/auth/me');
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -116,20 +114,25 @@ export const authAPI = {
 export const taskAPI = {
   async submitGoal(goal: string): Promise<Task> {
     try {
-      // FIX: Your backend 'Goal' class expects { description: string }
-      // Your current code was sending { goal: goal }
-      const response = await apiClient.post<Task>('/goals', { description: goal });
+      const response = await apiClient.post<Task>('/api/v1/tasks/goals', { description: goal });
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
     }
   },
  
+  async getTasks(): Promise<Task[]> {
+    try {
+        const response = await apiClient.get<Task[]>('/api/v1/tasks');
+        return response.data;
+    } catch (error) {
+        throw handleError(error as AxiosError<ApiError>);
+    }
+  },
+
   async updateTask(taskId: string, status: string): Promise<Task> {
     try {
-      // FIX: Your backend 'TaskUpdate' model REQUIRES 'agent_id'
-      // You must pass the agent_id (e.g., 'mcp' or 'ceo') or it will 422
-      const response = await apiClient.put<Task>(`/tasks/${taskId}`, { 
+      const response = await apiClient.put<Task>(`/api/v1/tasks/${taskId}`, { 
         status,
         agent_id: 'mcp' 
       });
@@ -144,7 +147,7 @@ export const taskAPI = {
 export const schedulerAPI = {
   async getJobs(): Promise<ScheduledJob[]> {
     try {
-      const response = await apiClient.get<ScheduledJob[]>('/scheduler/jobs');
+      const response = await apiClient.get<ScheduledJob[]>('/api/v1/scheduler/jobs');
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -200,7 +203,7 @@ export const agentAPI = {
 export const messageAPI = {
   async sendMessage(recipientId: string, content: string): Promise<void> {
     try {
-      await apiClient.post('/messages/send', {
+      await apiClient.post('/api/v1/messages/send', {
         recipient_id: recipientId,
         content,
       });
@@ -211,7 +214,7 @@ export const messageAPI = {
 
   async getMessages(agentId: string): Promise<any[]> {
     try {
-      const response = await apiClient.get(`/messages/receive/${agentId}`);
+      const response = await apiClient.get(`/api/v1/messages/receive/${agentId}`);
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -220,7 +223,7 @@ export const messageAPI = {
 
   async textToSpeech(text: string): Promise<Blob> {
     try {
-      const response = await apiClient.post<Blob>('/speak', { text }, { responseType: 'blob' });
+      const response = await apiClient.post<Blob>('/api/v1/messages/speak', { text }, { responseType: 'blob' });
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -232,7 +235,7 @@ export const messageAPI = {
 export const graphAPI = {
   async getGraph(): Promise<GraphData> {
     try {
-      const response = await apiClient.get<GraphData>('/api/v1/graph');
+      const response = await apiClient.get<GraphData>('/api/v1/graph/');
       return response.data;
     } catch (error) {
       throw handleError(error as AxiosError<ApiError>);
@@ -286,11 +289,11 @@ export const productAPI = {
 
 // ============ LEAD ENDPOINTS ============
 export const leadsAPI = {
-  async submitLead(email: string, full_name?: string, company?: string, source: string = 'landing_page'): Promise<Lead> {
+  async submitLead(email: string, name?: string, company?: string, source: string = 'landing_page'): Promise<Lead> {
     try {
       const response = await apiClient.post<Lead>('/api/v1/leads', {
         email,
-        full_name,
+        name,
         company,
         source,
       });

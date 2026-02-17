@@ -17,7 +17,7 @@ export interface AuthTokens {
 
 export interface Task {
   id: string;
-  goal: string;
+  description: string;
   status: 'pending' | 'in_progress' | 'completed' | 'failed';
   created_at: string;
   updated_at: string;
@@ -84,7 +84,7 @@ export interface Product {
   stripe_product_id: string;
   stripe_price_id: string;
   features: string[];
-  active: boolean;
+  is_active: boolean;
 }
 
 export interface CheckoutSession {
@@ -164,7 +164,7 @@ export interface PaginatedResponse<T> {
 export interface Lead {
   id: string;
   email: string;
-  full_name?: string;
+  name?: string;
   company?: string;
   source: string;
   status: 'new' | 'contacted' | 'converted' | 'lost';

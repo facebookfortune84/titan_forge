@@ -2,7 +2,7 @@ import uuid
 
 from sqlalchemy import (JSON, Boolean, Column, DateTime, ForeignKey, Integer,
                         String)
-from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
@@ -91,7 +91,7 @@ class Event(Base):
         String, nullable=False, index=True
     )  # e.g., "user_signup", "subscription_created", "api_call", "agent_task_completed"
     payload = Column(
-        JSONB, nullable=True
+        JSON, nullable=True
     )  # Event-specific data (e.g., {"api_endpoint": "/goals", "status": "success"})
     timestamp = Column(DateTime(timezone=True), server_default=func.now(), index=True)
 

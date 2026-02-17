@@ -292,12 +292,12 @@ export default function LandingPageProPro() {
             transition={{ delay: 0.3 }}
             className="text-5xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight"
           >
-            Your AI{" "}
+            Ship Code{" "}
             <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Development Agency
+              3x Faster
             </span>
             <br />
-            On Demand
+            with AI Agents
           </motion.h1>
 
           <motion.p
@@ -306,8 +306,9 @@ export default function LandingPageProPro() {
             transition={{ delay: 0.4 }}
             className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed"
           >
-            Ship 5x faster with a multi-modal AI swarm. Voice-command your agents, automate workflows,
-            and deliver production-grade software in days, not months.
+            Let AI handle testing, code reviews, and documentation.
+            <br />
+            You focus on building amazing features.
           </motion.p>
 
           <motion.div
@@ -320,7 +321,7 @@ export default function LandingPageProPro() {
               onClick={() => navigate("/register")}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 rounded-lg font-bold text-lg flex items-center justify-center gap-2 transition transform hover:scale-105"
             >
-              Start Free Trial <ArrowRight size={20} />
+              Get 14 Days Free <ArrowRight size={20} />
             </button>
             <button
               onClick={() => navigate("/cockpit")}
@@ -329,6 +330,18 @@ export default function LandingPageProPro() {
               <Play size={20} />
               Live Agent Demo
             </button>
+          </motion.div>
+
+          {/* Trust Indicator */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-center mt-6 mb-12"
+          >
+            <p className="text-slate-400 text-sm">
+              Trusted by 200+ developers ⭐ 4.9/5 stars • No credit card required
+            </p>
           </motion.div>
 
           {/* Hero metrics */}

@@ -1,0 +1,256 @@
+# TitanForge Business Profile
+# Primary source of truth for all marketing and agent logic
+
+businessName: TitanForge
+tagline: "Build, automate, and innovate faster with AI agents"
+domain: "realmstoriches.xyz"
+websiteUrl: "https://realmstoriches.xyz"
+
+# ICP (Ideal Customer Profile)
+idealCustomerProfile:
+  primarySegments:
+    - segment: "Solo Developers & Small Teams"
+      role: "Software Developer / Tech Lead"
+      companySize: "1-50"
+      companyType: "Startup / Individual / Freelancer"
+      pain_points:
+        - "Building repetitive boilerplate is slow and boring"
+        - "Can't afford to hire senior developers"
+        - "Testing and code review are bottlenecks"
+        - "Deployment is risky and manual"
+      desired_outcomes:
+        - "Spend more time on creative/business logic"
+        - "Ship features faster with fewer people"
+        - "Reduce bugs and deployment risk"
+        - "Feel confident in code quality"
+      budget: "$19-$99/month"
+      purchaseCycle: "Impulse to 1-week"
+      buyingSignals:
+        - "Searching 'AI code generator' or 'dev automation'"
+        - "Active in Python/JavaScript communities"
+        - "Posted about dev hiring struggles"
+        - "Asking for code review feedback"
+      objections:
+        - "Cost (but willing to try free/cheap)"
+        - "Learning curve (wants plug-and-play)"
+        - "Afraid AI output is poor quality"
+        - "Privacy concerns with code"
+    
+    - segment: "Dev Agencies & Consultancies"
+      role: "Founder / Operations Lead / Project Manager"
+      companySize: "10-500"
+      companyType: "Development Agency / Consulting / Custom Dev Shop"
+      pain_points:
+        - "Delivery timelines are tight; margins are thin"
+        - "Senior devs focus on billable work, not internal tools"
+        - "Quality consistency across projects is hard"
+        - "Scaling without proportional hiring is impossible"
+      desired_outcomes:
+        - "Deliver projects 2x faster"
+        - "Improve quality while reducing labor"
+        - "Offer new 'AI-powered' services to differentiate"
+        - "Increase profit margins without cutting corners"
+      budget: "$999-$4,999/month"
+      purchaseCycle: "2-4 weeks"
+      buyingSignals:
+        - "Questions about 'speeding up delivery' or 'AI services'"
+        - "Posted about team scaling or hiring challenges"
+        - "Evaluating new technologies for competitive edge"
+        - "Looking for productized service opportunities"
+      objections:
+        - "Afraid of losing control/quality"
+        - "Integration complexity with existing workflow"
+        - "ROI unclear on new tooling"
+        - "Team adoption risk"
+    
+    - segment: "Enterprises & Scale-ups"
+      role: "VP Engineering / CTO / Engineering Manager"
+      companySize: "500+"
+      companyType: "Enterprise / Scale-up / Tech Company"
+      pain_points:
+        - "Development velocity is bottleneck to growth"
+        - "Hiring top talent is expensive and slow"
+        - "Need to maintain high quality and compliance"
+        - "Technical debt limits innovation speed"
+      desired_outcomes:
+        - "Unlock engineering velocity at scale"
+        - "Reduce time-to-value for innovation"
+        - "Competitive advantage via AI integration"
+        - "Retain talent by eliminating drudgery"
+      budget: "Custom / $5,000+/month"
+      purchaseCycle: "6-12 weeks"
+      buyingSignals:
+        - "Attending AI / developer conferences"
+        - "Company is hiring aggressively"
+        - "Posted about innovation or R&D initiatives"
+        - "Exploring internal platform / tooling improvements"
+      objections:
+        - "Enterprise requirements (SLA, compliance, security)"
+        - "Need proof of concept before commitment"
+        - "Integration with legacy systems complex"
+        - "Information security review needed"
+
+# Core Offerings
+offerings:
+  primary:
+    name: "AIaaS Platform"
+    description: "Self-serve access to TitanForge agent swarm for development automation"
+    features:
+      - "Autonomous agent task execution"
+      - "Code generation and refactoring"
+      - "Automated testing and code review"
+      - "Documentation generation"
+      - "Deployment assistance"
+      - "24/7 availability"
+    tiers:
+      - name: "Starter"
+        monthlyPrice: 19
+        annualPrice: 199
+        target: "Solo developers, hobbyists"
+        limit: "1,000 API calls/month, 1 concurrent agent"
+        features:
+          - "Basic code generation"
+          - "Standard support"
+          - "Community access"
+      - name: "Pro"
+        monthlyPrice: 99
+        annualPrice: 999
+        target: "Small teams, freelancers, agencies"
+        limit: "10,000 API calls/month, 5 concurrent agents"
+        features:
+          - "All Starter features"
+          - "Advanced code review"
+          - "Priority email support"
+          - "Team collaboration"
+          - "Advanced analytics"
+      - name: "Enterprise"
+        monthlyPrice: null  # Custom
+        annualPrice: null   # Custom
+        target: "Enterprises, large agencies"
+        limit: "Unlimited, custom SLA"
+        features:
+          - "All Pro features"
+          - "Dedicated account manager"
+          - "24/7 support with SLA"
+          - "Custom deployment options"
+          - "Advanced security features"
+  
+  secondary:
+    - name: "Productized Services"
+      description: "Fixed-price development packages"
+      offerings:
+        - name: "Micro-Feature Development"
+          price: "$499-$1,499"
+          description: "Small feature implementation"
+        - name: "Website Audit"
+          price: "$299-$799"
+          description: "Comprehensive audit + recommendations"
+        - name: "API Endpoint Creation"
+          price: "$799-$1,999"
+          description: "REST API endpoint with tests"
+
+# Unique Value Proposition
+uniqueValueProposition:
+  headline: "The only AI swarm designed for developers, by developers"
+  subheadline: "Ship code 2x faster. Deploy with confidence. Build your competitive edge."
+  keyDifferentiators:
+    - "Agentic Intelligence: Not just AI tools; coordinated swarm that thinks together"
+    - "Full Lifecycle: From ideation through testing to deployment"
+    - "Transparent: You see what agents do; no black boxes"
+    - "Adaptable: Retune for any tech stack or business domain"
+    - "Affordable: Start at $19/month; scale to Enterprise"
+    - "Production-Ready: Designed for real-world codebases"
+
+# Tone & Voice
+tonality:
+  primary: "Direct, practical, no-BS"
+  secondary: "Empowering, ambitious, technical but accessible"
+  personality: "Confident but not arrogant; helpful; speaks developer language"
+  examples:
+    - "We don't oversell. Agents work. Or they don't."
+    - "No marketing fluff. Just results."
+    - "Built by people who code. For people who code."
+  avoid:
+    - "Marketing jargon and buzzwords"
+    - "False promises about AI replacing developers"
+    - "Over-hype on AI capabilities"
+    - "Technical FUD about competitors"
+
+# Target Channels (where to find ICP)
+channels:
+  primaryChannels:
+    - channel: "SEO & Organic Search"
+      keywords:
+        - "AI code generator"
+        - "dev automation"
+        - "AI agents for developers"
+        - "automated testing"
+        - "code review automation"
+    
+    - channel: "Developer Communities"
+      platforms:
+        - "Reddit (r/programming, r/Python, r/typescript, r/SaaS)"
+        - "Discord (developer servers)"
+        - "GitHub (relevant projects)"
+        - "Stack Overflow (high-rep users)"
+    
+    - channel: "Tech Jobs / Hiring Platforms"
+      platforms:
+        - "LinkedIn (CTOs, VPs, founders)"
+        - "Twitter/X (tech influencers)"
+        - "HackerNews (technical audience)"
+  
+  secondaryChannels:
+    - "Tech conferences (AI, DevOps, SaaS)"
+    - "Affiliate / partner networks"
+    - "Guest posting on popular dev blogs"
+    - "Podcast sponsorships (dev-focused)"
+    - "Product Hunt (when ready)"
+
+# Market Context
+marketContext:
+  market_size: "Global software development market ~$1.2T. Agents/AI automation ~$50B+ adjacent"
+  competition: "GitHub Copilot, Claude for code, other AI code tools"
+  differentiation: "Full swarm approach, transparent, fully deployed on-premises option"
+  timing: "AI adoption accelerating; developers actively seeking automation tools"
+  traction_path: "Organic first (SEO, content); then referral and partnership"
+
+# Success Metrics
+successMetrics:
+  month_1:
+    organic_traffic: "500+ visitors"
+    email_list: "200+ subscribers"
+    lead_capture_rate: "5-10%"
+    qualified_leads: "50+"
+    trial_signups: "10+"
+    paying_customers: "1-3"
+  
+  month_3:
+    organic_traffic: "5,000+ visitors"
+    email_list: "1,000+ subscribers"
+    lead_capture_rate: "10-15%"
+    qualified_leads: "500+"
+    trial_signups: "100+"
+    paying_customers: "20-50"
+  
+  month_6:
+    organic_traffic: "20,000+ visitors"
+    email_list: "5,000+ subscribers"
+    paying_customers: "100-200+"
+    mrr: "$20,000-$40,000"
+
+# Product Development Roadmap (High-Level)
+roadmap:
+  current: "MVP: Core agents, basic UI, Stripe integration"
+  next_30_days:
+    - "Improve agent reliability"
+    - "Add customer support tooling"
+    - "Expand agent capabilities"
+  next_90_days:
+    - "White-label / reseller program"
+    - "Advanced integrations (Slack, GitHub, etc.)"
+    - "On-premises deployment option"
+  next_year:
+    - "Marketplace for custom agents"
+    - "Advanced analytics and reporting"
+    - "Multi-team management"

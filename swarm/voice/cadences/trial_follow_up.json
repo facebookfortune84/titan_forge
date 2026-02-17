@@ -1,0 +1,57 @@
+{
+  "cadenceId": "trial_user_follow_up",
+  "cadenceName": "Trial User Follow-up Sequence",
+  "description": "14-day follow-up sequence for trial users",
+  "targetSegment": "trial_users",
+  "steps": [
+    {
+      "stepId": 1,
+      "delay": "immediate",
+      "channel": "email",
+      "subject": "Welcome to your 14-day TitanForge trial!",
+      "template": "welcome_trial",
+      "condition": "trial_started"
+    },
+    {
+      "stepId": 2,
+      "delay": "2_days",
+      "channel": "email",
+      "subject": "Quick tip: Set up your first agent in 5 minutes",
+      "template": "first_agent_setup",
+      "condition": "no_agent_created",
+      "alternateChannel": "sms"
+    },
+    {
+      "stepId": 3,
+      "delay": "5_days",
+      "channel": "call",
+      "flowRef": "trial_engagement_call",
+      "template": "trial_engagement_script",
+      "condition": "no_agent_used",
+      "maxAttempts": 2
+    },
+    {
+      "stepId": 4,
+      "delay": "10_days",
+      "channel": "email",
+      "subject": "See how other devs are using TitanForge",
+      "template": "case_study_email",
+      "condition": "still_trial"
+    },
+    {
+      "stepId": 5,
+      "delay": "13_days",
+      "channel": "call",
+      "flowRef": "trial_expiring_upsell",
+      "template": "upgrade_script",
+      "condition": "trial_not_converted",
+      "maxAttempts": 1
+    }
+  ],
+  "conversionEvents": [
+    "AGENT_CREATED",
+    "AGENT_EXECUTED",
+    "FEEDBACK_SUBMITTED",
+    "UPGRADE_INITIATED"
+  ]
+}

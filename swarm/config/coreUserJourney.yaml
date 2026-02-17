@@ -1,0 +1,481 @@
+# TitanForge Core User Journey
+# Defines the path from cold visitor to paying customer
+# Used by Funnel_Agent, Analytics_Agent, EmailCRM_Agent for tracking and optimization
+
+journey:
+  stage_1_awareness:
+    stage_name: "Awareness"
+    description: "Cold visitor discovers TitanForge"
+    duration: "Seconds to 2 minutes"
+    
+    channels:
+      - "Organic search (SEO): 'AI code generator', 'dev automation', etc."
+      - "Social media: Blog shared on Twitter/Reddit"
+      - "Referral: Friend or colleague recommendation"
+      - "Content: Guest post or mention on dev blog"
+    
+    touchpoints:
+      - "Search result click → landing page"
+      - "Social media link → landing page"
+      - "Referral link → landing page or specific content"
+      - "Blog post mention → landing page"
+    
+    user_question: "What is TitanForge? Is this for me?"
+    
+    page_strategy:
+      primary_page: "Landing page (/)"
+      hero_focus: "Quick answer to 'what' and 'why now'"
+      copy_tone: "Direct, credible, benefit-driven"
+      visual: "Modern, shows fast results"
+      cta: "Hero CTA: 'Try Free' or 'See How It Works'"
+    
+    success_metric: "Click landing page CTA (lead form or 'Learn More')"
+    conversion_target: "5-10% of visitors proceed to consideration"
+  
+  stage_2_consideration:
+    stage_name: "Consideration"
+    description: "Visitor evaluates TitanForge's fit and value"
+    duration: "5-20 minutes (typically 1-2 sessions)"
+    
+    touchpoints:
+      - "Read landing page hero section"
+      - "Explore value props and features"
+      - "Read testimonials/social proof"
+      - "View pricing tiers and comparison"
+      - "Read blog posts or case studies"
+      - "Enter email in lead form"
+    
+    pages_visited:
+      - "/" (landing page): Hero, benefits, social proof
+      - "/pricing": Plan comparison, features, FAQ
+      - "/blog": Deep content on use cases, tutorials, case studies
+      - Lead form on landing or blog
+    
+    user_questions:
+      - "What problem does this solve?"
+      - "Is it good enough?"
+      - "How much does it cost?"
+      - "What are others saying?"
+      - "Can I try before paying?"
+    
+    decision_points:
+      - "Does headline resonate?"
+      - "Are benefits clear?"
+      - "Is pricing reasonable?"
+      - "Do I see others like me using it?"
+    
+    success_metric: "Lead form submission (email + name) OR click 'Try Free' CTA"
+    conversion_target: "10-15% of aware visitors → leads; 5-10% → trial signups"
+  
+  stage_3_lead_capture:
+    stage_name: "Lead Capture"
+    description: "Visitor converts to lead (email + minimal info)"
+    duration: "1-2 minutes"
+    
+    touchpoints:
+      - "Click lead form CTA"
+      - "Fill email, name, optional company/size"
+      - "Submit form"
+      - "Receive confirmation email"
+    
+    pages:
+      - "Lead form on landing page"
+      - "Lead form on blog posts"
+      - "Exit-intent popup (if implemented)"
+    
+    form_fields:
+      - "Email (required)"
+      - "First name (required)"
+      - "Last name (optional)"
+      - "Company name (optional)"
+      - "Company size (optional dropdown)"
+    
+    backend_trigger:
+      event: "lead_form_submitted"
+      api_endpoint: "POST /api/v1/sales/lead-magnet/download"
+      action: "Store lead in database, trigger welcome email"
+    
+    success_metric: "Form submission successful"
+    conversion_target: "20-30% of consideration-stage visitors → leads"
+  
+  stage_4_email_nurture:
+    stage_name: "Email Nurture"
+    description: "Lead receives welcome and value education"
+    duration: "3-7 days (via email sequence)"
+    
+    email_sequence:
+      email_1:
+        name: "Welcome"
+        trigger: "lead_form_submitted"
+        delay: "immediate"
+        subject: "Welcome to TitanForge 🚀 (Here's how to get started)"
+        key_content:
+          - "Thank you for signing up"
+          - "Quick intro to TitanForge and agents"
+          - "Link to free trial"
+          - "Link to 2-min demo video"
+        cta: "Start Your Free Trial"
+        goal: "Convert lead to trial user"
+      
+      email_2:
+        name: "Value Intro"
+        trigger: "lead_form_submitted AND NOT signup_started"
+        delay: "2 days"
+        subject: "Ship your first feature in 10 minutes"
+        key_content:
+          - "Concrete example: 'We just wrote 50 lines of tested code in 30 seconds'"
+          - "Link to tutorial blog post"
+          - "Social proof: '500+ developers use TitanForge'"
+          - "Reminder: free trial link"
+        cta: "Try Free"
+        goal: "Combat hesitation, build confidence"
+      
+      email_3:
+        name: "Social Proof"
+        trigger: "lead_form_submitted AND NOT signup_started"
+        delay: "5 days"
+        subject: "[Case Study] How DevAgency cut hiring by 30%"
+        key_content:
+          - "Real customer case study with metrics"
+          - "What changed for them (shipping faster, team morale, revenue)"
+          - "Link to full case study"
+          - "Objection handling (quality concerns)"
+        cta: "Read the Case Study"
+        goal: "Overcome objections, inspire action"
+    
+    success_metric: "Lead clicks email CTA OR visits landing page"
+    conversion_target: "20-30% of leads → trial signups"
+  
+  stage_5_signup:
+    stage_name: "Signup"
+    description: "Lead creates account (becomes trial user)"
+    duration: "2-3 minutes"
+    
+    pages:
+      - "/register": Email, password, optional company
+    
+    user_action:
+      - "Click 'Try Free' CTA (from email, landing, or blog)"
+      - "Fill registration form"
+      - "Confirm email"
+      - "Receive onboarding email"
+    
+    backend_trigger:
+      event: "account_created"
+      event_properties:
+        - "email"
+        - "company_name (if provided)"
+        - "signup_source (landing, email, blog, etc.)"
+      action: "Create user record, init trial (7 days free), send onboarding email"
+    
+    success_metric: "Email confirmed, account active"
+    conversion_target: "70-80% of leads that click CTA → trial account"
+  
+  stage_6_onboarding:
+    stage_name: "Onboarding"
+    description: "User sees dashboard, runs first task, experiences AHA moment"
+    duration: "10-20 minutes"
+    
+    pages:
+      - "/dashboard": Welcome, guided task setup
+    
+    user_actions:
+      - "Log in for first time"
+      - "See onboarding flow (wizard or guided tour)"
+      - "Choose first task (template options)"
+      - "Run first agent task"
+      - "See results"
+      - "Celebrate: 'Your first code just shipped!'"
+    
+    critical_moments:
+      - "First login": Set expectations, show value immediately
+      - "Task execution": Show agents working (real-time log/progress bar)
+      - "Results**: Make result clear, impressive, usable
+    
+    backend_triggers:
+      - "dashboard_viewed"
+      - "first_task_created"
+      - "first_task_completed"
+    
+    email_triggers:
+      - "onboarding_email_1": Sent immediately upon signup (dashboard walkthrough)
+      - "onboarding_email_2": If no task created within 2 hours (gentle nudge + example)
+      - "first_task_success_email": Sent after first task completion (celebration + next steps)
+    
+    success_metric: "User completes first task successfully"
+    conversion_target: "60-70% of trial signups → complete first task (AHA moment)"
+  
+  stage_7_activation:
+    stage_name: "Activation"
+    description: "User demonstrates product stickiness (uses repeatedly, sees value)"
+    duration: "2-7 days after signup"
+    
+    activation_criteria:
+      - "Ran 5+ agent tasks"
+      - "Created 2+ different task types"
+      - "Used system on 2+ different days"
+      - "Invited team member (optional)"
+    
+    user_actions:
+      - "Use agents on real code/projects"
+      - "Experiment with different task types"
+      - "Share results with team"
+      - "Consider upgrade"
+    
+    backend_triggers:
+      - "task_count = 5"
+      - "api_call_count = 50+"
+      - "days_active = 3+"
+      - "user_satisfaction (inferred from usage patterns)"
+    
+    email_triggers:
+      - "activation_email_1": After 5 tasks (celebrate success)
+      - "feature_highlight": Showcase advanced feature (code review, testing, etc.)
+      - "team_collaboration_email": Hint at team features available in Pro
+    
+    success_metric: "User hits Starter plan limits OR upgrades to Pro"
+    conversion_target: "40-50% of active users → upgrade to Pro"
+  
+  stage_8_monetization:
+    stage_name: "Monetization"
+    description: "User converts to paid plan (becomes customer)"
+    duration: "1-4 weeks after signup"
+    
+    monetization_paths:
+      path_1_rate_limit:
+        trigger: "User hits 1,000 API call limit on Starter"
+        action: "Show rate limit modal → offer upgrade"
+        email: "You've hit your limit! Pro unlocks 10x more"
+      
+      path_2_feature_discovery:
+        trigger: "User wants advanced feature (team collab, advanced review)"
+        action: "Show feature locked to Pro"
+        email: "Unlock advanced features with Pro"
+      
+      path_3_email_campaign:
+        trigger: "User activated (5+ tasks) but hasn't upgraded after 5 days"
+        action: "Send upgrade email with special offer"
+        email: "Ready for more? Pro for only $99/month (first month $49)"
+      
+      path_4_direct_sales:
+        trigger: "User has high engagement + enterprise indicators (company size, use case)"
+        action: "Sales team reaches out with Enterprise offer"
+        email: "Your use case might qualify for Enterprise pricing"
+    
+    pages:
+      - "/pricing": Compare plans, highlight upgrade benefits
+      - "/checkout": Stripe payment form
+    
+    backend_triggers:
+      - "rate_limit_hit"
+      - "upgrade_page_viewed"
+      - "payment_intent_created"
+      - "subscription_created"
+      - "payment_successful"
+    
+    email_sequence:
+      - "upgrade_offer_1": Value prop + link to pricing
+      - "upgrade_offer_2": Social proof (how many upgraded, benefits they see)
+      - "upgrade_offer_limited_time": "Special offer expires in X days"
+      - "upgrade_congratulations": Sent after payment (welcome to Pro, next steps)
+    
+    success_metric: "Subscription created AND payment successful"
+    conversion_target: "20-30% of trial users → paying customers"
+  
+  stage_9_expansion:
+    stage_name: "Expansion & Retention"
+    description: "Customer uses Pro, discovers more value, potentially upgrades to Enterprise"
+    duration: "Ongoing (months 1+)"
+    
+    expansion_triggers:
+      - "User hits Pro limits (5 concurrent tasks, 10K API calls)"
+      - "User invites multiple team members (team feature value)"
+      - "User wants on-premises or custom features"
+    
+    retention_triggers:
+      - "No task in 7 days": Send engagement email, success story
+      - "Support ticket filed": Respond quickly, exceed expectations
+      - "Monthly usage declining": Check in with customer, offer support
+    
+    email_campaigns:
+      - "feature_of_month": Highlight new or underused feature
+      - "customer_success": Share how they've improved (speed, cost, quality)
+      - "expansion_offer": If hitting limits, offer Enterprise tier
+      - "retention": If engagement declining, remind of value
+    
+    goal: "Maximize LTV by expanding usage, preventing churn"
+    expansion_target: "10-20% of Pro users → upgrade to Enterprise"
+    retention_target: "90%+ month-over-month retention"
+
+# Event Tracking Map
+# Maps user actions to trackable events for analytics and optimization
+
+events:
+  stage_1_awareness:
+    - page_view (landing, blog, pricing, etc.)
+    - traffic_source (organic_search, social, referral, direct, etc.)
+    - referrer_domain
+    - utm_parameters (utm_source, utm_medium, utm_campaign)
+    - session_duration
+  
+  stage_2_consideration:
+    - page_view (landing, pricing, blog detail, etc.)
+    - blog_post_read
+    - pricing_page_view
+    - feature_section_explored
+    - time_on_page
+    - scroll_depth
+  
+  stage_3_lead_capture:
+    - lead_form_view
+    - lead_form_started
+    - lead_form_submitted
+    - form_abandonment (if user starts but doesn't submit)
+    - lead_data (email, name, company)
+  
+  stage_4_email_nurture:
+    - email_delivered
+    - email_opened
+    - email_link_clicked
+    - email_unsubscribed
+    - days_to_first_email_open
+  
+  stage_5_signup:
+    - registration_page_view
+    - registration_started
+    - registration_completed
+    - email_confirmation_sent
+    - email_confirmed
+    - account_created
+    - signup_source (which CTA/page led here)
+  
+  stage_6_onboarding:
+    - dashboard_viewed
+    - onboarding_wizard_started
+    - onboarding_wizard_completed
+    - first_task_created
+    - first_task_completed
+    - first_task_time_to_completion
+    - user_satisfaction (rating, if available)
+  
+  stage_7_activation:
+    - task_created_count (cumulative)
+    - task_completed_count (cumulative)
+    - api_call_count (cumulative)
+    - different_task_types_used (code_gen, testing, review, etc.)
+    - days_active
+    - time_since_signup
+    - last_activity_date
+  
+  stage_8_monetization:
+    - rate_limit_hit
+    - upgrade_modal_viewed
+    - upgrade_page_viewed
+    - pricing_plan_selected
+    - checkout_page_viewed
+    - payment_intent_created
+    - payment_successful
+    - subscription_created
+    - subscription_tier (starter, pro, enterprise)
+    - upgrade_source (rate limit, feature, email, direct link, etc.)
+  
+  stage_9_expansion:
+    - subscription_renewed
+    - subscription_upgraded
+    - subscription_downgraded
+    - subscription_churned (cancelled)
+    - team_member_invited
+    - support_ticket_created
+    - nps_score (if surveyed)
+    - churn_risk_signals (declining usage, support issues, etc.)
+
+# Funnel Visualization
+# High-level conversion rates to optimize
+
+funnel:
+  visitors_to_awareness: "100%"
+  awareness_to_consideration: "20-30%"
+  consideration_to_lead: "10-15%"
+  lead_to_signup: "15-20%"
+  signup_to_onboarded: "60-70%"
+  onboarded_to_activated: "40-50%"
+  activated_to_paid: "20-30%"
+  paid_to_expansion: "10-20%"
+  
+  # Optimization levers (what to test)
+  optimization_levers:
+    awareness_to_consideration: "Improve landing page copy, add video, better social proof"
+    consideration_to_lead: "Clearer value prop, easier lead form, trust signals"
+    lead_to_signup: "Better nurture emails, faster follow-up, lower friction signup"
+    signup_to_onboarded: "Faster onboarding, clearer first task, celebrate early wins"
+    onboarded_to_activated: "Better task templates, success patterns, use case guidance"
+    activated_to_paid: "Rate limit strategy, feature gating, upgrade offers, limited-time deals"
+    paid_to_expansion: "Team features, advanced capabilities, customer success outreach"
+
+# A/B Testing Hypotheses
+# Priority experiments to run based on funnel gaps
+
+ab_tests:
+  test_1:
+    name: "Hero Headline Test"
+    stage: "Awareness → Consideration"
+    hypothesis: "More specific benefit-driven headline increases CTR"
+    control: "Ship code in days, not weeks. Meet your AI development team."
+    variant: "40% faster. 60% fewer bugs. 50% lower costs. No hire needed."
+    metric: "Hero CTA click rate, conversion to lead form"
+    priority: "HIGH"
+  
+  test_2:
+    name: "Lead Form Length Test"
+    stage: "Consideration → Lead"
+    hypothesis: "Shorter form (email only) increases conversion; longer form improves lead quality"
+    control: "Email + First Name + Last Name + Company + Company Size (5 fields)"
+    variant_short: "Email only (1 field)"
+    variant_long: "Above + Role + Budget + Timeline (8 fields)"
+    metric: "Lead form submission rate, lead quality (by conversion rate)"
+    priority: "MEDIUM"
+  
+  test_3:
+    name: "Pricing Page CTA Test"
+    stage: "Consideration → Signup"
+    hypothesis: "'Start Free' CTA converts better than 'Try Free'"
+    control: "Start Free (No Card Required)"
+    variant: "Try Free for 7 Days"
+    metric: "CTA click rate, conversion to signup"
+    priority: "MEDIUM"
+  
+  test_4:
+    name: "First Task Complexity Test"
+    stage: "Signup → Activation"
+    hypothesis: "Simpler first task (pre-filled, 1-click) increases completion than blank canvas"
+    control: "User picks task type, fills in details"
+    variant: "Pre-filled example task, 1-click to run"
+    metric: "First task completion rate, time to completion"
+    priority: "HIGH"
+  
+  test_5:
+    name: "Upgrade Timing Test"
+    stage: "Activated → Paid"
+    hypothesis: "Offering upgrade after 5 tasks converts better than at rate limit"
+    control: "Upgrade modal when rate limit hit"
+    variant: "Email + in-app prompt after 5 tasks completed"
+    metric: "Upgrade rate, time-to-upgrade, upgrade LTV"
+    priority: "MEDIUM"
+
+# Retention Metrics
+# Track post-purchase customer health
+
+retention:
+  metric_1: "Week 1 Retention: 80%+ of paid users still active"
+  metric_2: "Month 1 Retention: 70%+ of paid users still active"
+  metric_3: "Month 3 Retention: 60%+ of paid users still active"
+  metric_4: "Churn Rate: Target <5% monthly churn"
+  metric_5: "NPS Score: Target 50+ (promoters minus detractors)"
+  metric_6: "Customer Health Score: Based on usage, support tickets, NPS"
+
+# Revenue Tracking
+revenue:
+  ltv_calculation: "Average customer lifetime (months) x average MRR per customer"
+  target_ltv_to_cac: "3:1 minimum (3x lifetime value vs. customer acquisition cost)"
+  gross_margin_target: "70%+ (pricing - COGS)"
+  expansion_revenue: "10%+ of revenue from tier upgrades + add-ons"

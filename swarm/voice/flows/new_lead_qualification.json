@@ -1,0 +1,161 @@
+{
+  "flowId": "new_lead_qualification",
+  "flowName": "New Lead Welcome & Trial Signup",
+  "version": "1.0",
+  "description": "Opening call for new leads - warm welcome, pain point discovery, trial signup",
+  "targetSegment": "solo_devs",
+  "estimatedDuration": "3-5 minutes",
+  "nodes": [
+    {
+      "nodeId": "start",
+      "type": "message",
+      "text": "Hi [Name], this is [Agent Name] from TitanForge. We received your signup interest today. Do you have a quick minute?",
+      "nextNode": "check_availability"
+    },
+    {
+      "nodeId": "check_availability",
+      "type": "question",
+      "question": "Do they have time to talk?",
+      "branches": [
+        {
+          "answer": "yes",
+          "nextNode": "purpose_statement"
+        },
+        {
+          "answer": "no",
+          "nextNode": "schedule_callback"
+        }
+      ]
+    },
+    {
+      "nodeId": "schedule_callback",
+      "type": "message",
+      "text": "No problem. When would be a better time? I can call you back then.",
+      "event": "CALLBACK_SCHEDULED",
+      "nextNode": "end"
+    },
+    {
+      "nodeId": "purpose_statement",
+      "type": "message",
+      "text": "Great. I just wanted to personally thank you for checking us out and make sure we're actually a fit for what you're building.",
+      "nextNode": "pain_point_discovery"
+    },
+    {
+      "nodeId": "pain_point_discovery",
+      "type": "question",
+      "question": "What's the biggest bottleneck in your current dev workflow?",
+      "branches": [
+        {
+          "answer": "boilerplate",
+          "nextNode": "pain_point_confirm_boilerplate"
+        },
+        {
+          "answer": "testing",
+          "nextNode": "pain_point_confirm_testing"
+        },
+        {
+          "answer": "other",
+          "nextNode": "pain_point_other"
+        }
+      ]
+    },
+    {
+      "nodeId": "pain_point_confirm_boilerplate",
+      "type": "message",
+      "text": "Yeah, that's super common. That's actually why we built TitanForge - to automate exactly that. Our AI agents handle the repetitive stuff so you can focus on the creative work.",
+      "event": "PAIN_POINT_IDENTIFIED",
+      "nextNode": "value_pitch"
+    },
+    {
+      "nodeId": "pain_point_confirm_testing",
+      "type": "message",
+      "text": "Testing is killer for solo devs. That's exactly what our code review and test generation agents handle. Saves most people 5-10 hours per week.",
+      "event": "PAIN_POINT_IDENTIFIED",
+      "nextNode": "value_pitch"
+    },
+    {
+      "nodeId": "pain_point_other",
+      "type": "message",
+      "text": "Got it. The beauty of TitanForge is you can set up custom agents for almost any workflow you have.",
+      "event": "PAIN_POINT_IDENTIFIED",
+      "nextNode": "value_pitch"
+    },
+    {
+      "nodeId": "value_pitch",
+      "type": "message",
+      "text": "Most of our beta users are shipping 30-40% faster. You can spin up custom agents for literally any workflow. The cool part? You only pay for what you use.",
+      "nextNode": "trial_offer"
+    },
+    {
+      "nodeId": "trial_offer",
+      "type": "question",
+      "question": "Ready to try the free trial?",
+      "branches": [
+        {
+          "answer": "yes",
+          "nextNode": "trial_confirmation"
+        },
+        {
+          "answer": "hesitant",
+          "nextNode": "objection_handling"
+        }
+      ]
+    },
+    {
+      "nodeId": "trial_confirmation",
+      "type": "message",
+      "text": "Perfect. I'm sending a link to your email right now. No credit card needed - 14 days, all pro features. Just click the link and you're good to go.",
+      "event": "TRIAL_SIGNUP_OFFERED",
+      "nextNode": "close"
+    },
+    {
+      "nodeId": "objection_handling",
+      "type": "question",
+      "question": "What concerns do you have?",
+      "branches": [
+        {
+          "answer": "learning_curve",
+          "nextNode": "objection_learning_curve"
+        },
+        {
+          "answer": "not_sure_fit",
+          "nextNode": "objection_fit"
+        },
+        {
+          "answer": "other",
+          "nextNode": "objection_other"
+        }
+      ]
+    },
+    {
+      "nodeId": "objection_learning_curve",
+      "type": "message",
+      "text": "That's fair. But most people get up and running in like 15 minutes. And we have live support - just hit reply on the email.",
+      "nextNode": "trial_offer"
+    },
+    {
+      "nodeId": "objection_fit",
+      "type": "message",
+      "text": "Totally get it. That's why the trial is perfect - try it risk-free. If it doesn't help, no charge.",
+      "nextNode": "trial_offer"
+    },
+    {
+      "nodeId": "objection_other",
+      "type": "message",
+      "text": "What would help you feel more confident trying it?",
+      "nextNode": "trial_offer"
+    },
+    {
+      "nodeId": "close",
+      "type": "message",
+      "text": "Awesome. You'll get the email in the next minute. Click the link and you're good to go. If you hit any snags, just reply - we're super responsive. Thanks for chatting with me!",
+      "event": "CALL_COMPLETED",
+      "nextNode": "end"
+    },
+    {
+      "nodeId": "end",
+      "type": "end",
+      "text": "Call ended"
+    }
+  ]
+}
